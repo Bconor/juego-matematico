@@ -8,7 +8,7 @@ pygame.init()
 # Configuración de la pantalla
 screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
 width, height = pygame.display.get_surface().get_size()
-pygame.display.set_caption("Juego Matemático")
+pygame.display.set_caption("Math Mnaia")
 
 # Colores
 white = (255, 255, 255)
