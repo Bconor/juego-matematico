@@ -583,7 +583,7 @@ def menu_principal():
         clock.tick(30)
 
 def iniciar_juego(opcion):
-    elif opcion == "Sumas":
+    if opcion == "Sumas":
         hacer_pregunta('+')  # Solo preguntas de suma
     elif opcion == "Restas":
         hacer_pregunta('-')  # Solo preguntas de resta
