@@ -64,9 +64,6 @@ def hacer_pregunta(operador):
     if operador == '+':
         respuesta_correcta = a + b
         pregunta = f"¿Cuánto es {a} + {b}?"
-    elif operador == 'MH':
-        respuesta_correcta = a + b
-        pregunta = f"¿Cuánto es {a} + {b}?"
     elif operador == '-':
         respuesta_correcta = a - b
         pregunta = f"¿Cuánto es {a} - {b}?"
@@ -182,45 +179,6 @@ def hacer_pregunta(operador):
                     
                 color = color_active if active else color_inactive
             elif event.type == pygame.KEYDOWN:
-                if operador=='MH':
-                    if event.key == pygame.K_RETURN:
-                        try:
-                            respuesta_usuario = int(text)
-                            if respuesta_usuario == respuesta_correcta:
-                                mostrar_respuesta("¡Respuesta correcta!", True)
-                                personaje1.nivel += 1
-                                if personaje1.nivel == 2 :
-                                    hacer_pregunta('+') 
-                                elif personaje1.nivel == 3 or personaje1.nivel == 4:
-                                    hacer_pregunta('-') 
-                                elif personaje1.nivel == 5 or personaje1.nivel == 6:
-                                    hacer_pregunta('*')
-                                elif personaje1.nivel == 7 or personaje1.nivel == 8:
-                                    hacer_pregunta('/')
-                                elif personaje1.nivel == 9 or personaje1.nivel ==10:
-                                    hacer_pregunta('Funciones')
-                                elif personaje1.nivel == 11 or personaje1.nivel == 12 :
-                                    hacer_pregunta('Geometría')
-                                elif personaje1.nivel == 13 or personaje1.nivel == 14 :
-                                    hacer_pregunta('Trigonometría')
-                                elif personaje1.nivel == 15 or personaje1.nivel == 16 :
-                                    hacer_pregunta('Sucesiones')
-                                elif personaje1.nivel == 17 or personaje1.nivel == 18 :
-                                    hacer_pregunta('Sumatorias')
-                                elif personaje1.nivel == 19 or personaje1.nivel == 20 :
-                                    hacer_pregunta('Vectores')
-                                elif personaje1.nivel == 21 or personaje1.nivel == 22 :
-                                    hacer_pregunta('Matrices')
-                            else:
-                                mostrar_respuesta("Respuesta incorrecta :(", False)
-                                quitar_vida()
-                        except ValueError:
-                            pass
-                        text = ''
-                    elif event.key == pygame.K_BACKSPACE:
-                        text = text[:-1]
-                    else:
-                        text += event.unicode
                 if operador=='+':
                     if event.key == pygame.K_RETURN:
                         try:
@@ -597,7 +555,7 @@ def mostrar_respuesta(mensaje, es_correcta):
 def menu_principal():
     clock = pygame.time.Clock()
     menu_font = pygame.font.Font(None, 24)  # Ajustar el tamaño de la fuente
-    opciones = ["Modo Historia", "Sumas", "Restas", "Multiplicación", "División", 
+    opciones = ["Sumas", "Restas", "Multiplicación", "División", 
                 "Funciones", "Geometría", "Trigonometría", "Sucesiones", 
                 "Sumatorias", "Vectores", "Matrices"]
     
@@ -625,8 +583,6 @@ def menu_principal():
         clock.tick(30)
 
 def iniciar_juego(opcion):
-    if opcion == "Modo Historia":
-        hacer_pregunta('MH')  # Comienza con preguntas de suma
     elif opcion == "Sumas":
         hacer_pregunta('+')  # Solo preguntas de suma
     elif opcion == "Restas":
