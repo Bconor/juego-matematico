@@ -41,7 +41,12 @@ class Personaje:
         self.nivel = nivel
         self.vida = vida
 
+    def reiniciar_nivel(self):
+        self.nivel = 1
+
+
 personaje1 = Personaje("jugador", 1, 100)
+
 def mostrar_info():
     # Mostrar información en la pantalla
     info_text = f"Nivel: {personaje1.nivel}"
@@ -178,7 +183,7 @@ def hacer_pregunta(operador):
                 if input_box.collidepoint(event.pos):
                     active = not active
                 elif button_rect.collidepoint(event.pos):
-                
+                    personaje1.reiniciar_nivel()
                     menu_principal()
                 else:
                     active = False
@@ -192,6 +197,7 @@ def hacer_pregunta(operador):
                             respuesta_usuario = int(text)
                             if respuesta_usuario == respuesta_correcta:
                                 mostrar_respuesta("¡Respuesta correcta!", True)
+                                
                                 personaje1.nivel += 1
                                 if personaje1.nivel == 2:
                                     hacer_pregunta('+')  # Cambiar a preguntas de resta en el nivel 2
