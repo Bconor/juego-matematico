@@ -30,6 +30,10 @@ input_box_h = 32
 corazon_img = pygame.image.load("juego matematico/img/corazon.png")
 corazon_img = pygame.transform.scale(corazon_img, (40, 40))
 
+button_text = font.render("Ir al Menú Principal", True, white)
+
+# Rectángulo del botón
+button_rect = button_text.get_rect(center=(width // 2, height // 2))
 # Clase Personaje
 class Personaje:
     def __init__(self, nombre, nivel, vida):
@@ -173,6 +177,9 @@ def hacer_pregunta(operador):
                 x, y = event.pos
                 if input_box.collidepoint(event.pos):
                     active = not active
+                elif button_rect.collidepoint(event.pos):
+                
+                    menu_principal()
                 else:
                     active = False
                     # Verificar si el operador no es 'MH'
@@ -524,18 +531,32 @@ def hacer_pregunta(operador):
         
                     
 
-        screen.fill(white)
-        mostrar_info()
-        mostrar_vida()
-        pygame.draw.rect(screen, color, input_box)
-        txt_surface = font.render(text, True, black)
-        screen.blit(txt_surface, (input_box.x + 5, input_box.y + 5))
-        text_pregunta = font.render(pregunta, True, black)
-        screen.blit(text_pregunta, (width // 2 - text_pregunta.get_width() // 2, height // 2 - text_pregunta.get_height() // 2))
-        pygame.display.flip()
-        clock.tick(30)
-        
+            screen.fill(white)
+            mostrar_info()
+            mostrar_vida()
+            pygame.draw.rect(screen, color, input_box)
+            txt_surface = font.render(text, True, black)
+            screen.blit(txt_surface, (input_box.x + 5, input_box.y + 5))
+            text_pregunta = font.render(pregunta, True, black)
+            screen.blit(text_pregunta, (width // 2 - text_pregunta.get_width() // 2, height // 2 - text_pregunta.get_height() // 2))
 
+            # Dibuja el botón
+            button_x = 20  # ajusta estas coordenadas según tu diseño
+            button_y = 50  # ajusta estas coordenadas según tu diseño
+            button_width = 200  # ajusta el ancho del botón según tu diseño
+            button_height = 30  # ajusta la altura del botón según tu diseño
+
+            # Crear el rectángulo del botón
+            button_rect = pygame.Rect(button_x, button_y, button_width, button_height)
+
+            # Crear el texto del botón
+            button_font = pygame.font.Font(None, 36)
+            button_text = button_font.render("Volver al Menú", True, (0, 0, 0))
+            pygame.draw.rect(screen, color, button_rect)
+            screen.blit(button_text, button_rect.topleft)
+
+            pygame.display.flip()
+            clock.tick(30)
 def quitar_vida():
     personaje1.vida -= 20
     if personaje1.vida <= 0:
@@ -552,12 +573,14 @@ def mostrar_respuesta(mensaje, es_correcta):
     pygame.time.wait(1000)  # Mostrar la respuesta durante 1 segundo
     screen.fill(white)  # Limpiar la pantalla después de mostrar la respuesta
 
+
+
 def menu_principal():
     clock = pygame.time.Clock()
     menu_font = pygame.font.Font(None, 24)  # Ajustar el tamaño de la fuente
     opciones = ["Sumas", "Restas", "Multiplicación", "División", 
                 "Funciones", "Geometría", "Trigonometría", "Sucesiones", 
-                "Sumatorias", "Vectores", "Matrices"]
+                "Sumatorias", "Vectores", "Matrices", "Salir"]
     
     while True:
         for event in pygame.event.get():
@@ -578,7 +601,7 @@ def menu_principal():
             pygame.draw.rect(screen, black, (300, 100 + i * 60, 200, 40), 2)
             opcion_text = menu_font.render(opcion, True, black)
             screen.blit(opcion_text, (350, 110 + i * 60))
-
+        
         pygame.display.flip()
         clock.tick(30)
 
