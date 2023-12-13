@@ -27,7 +27,7 @@ input_box_w = 200
 input_box_h = 32
 
 # Imagen de los corazones
-corazon_img = pygame.image.load("img/corazon.png")
+corazon_img = pygame.image.load("juego matematico/img/corazon.png")
 corazon_img = pygame.transform.scale(corazon_img, (40, 40))
 
 # Clase Personaje
@@ -47,6 +47,13 @@ def mostrar_info():
 def mostrar_vida():
     for i in range(personaje1.vida // 20):
         screen.blit(corazon_img, (width - 50 - i * 50, 10))
+
+def mostrar_felicidades():
+    felicidades_text = font.render("¡Felicidades! Has alcanzado el nivel 12.", True, (0, 255, 0))
+    screen.blit(felicidades_text, (width // 2 - felicidades_text.get_width() // 2, height // 2 - felicidades_text.get_height() // 2))
+    pygame.display.flip()
+    pygame.time.wait(2000)  # Mostrar el mensaje de felicitaciones durante 2 segundos
+    screen.fill(white)
 
 def hacer_pregunta(operador):
     a = random.randint(1, 3 * personaje1.nivel)
@@ -171,6 +178,8 @@ def hacer_pregunta(operador):
                     active = not active
                 else:
                     active = False
+                    # Verificar si el operador no es 'MH'
+                    
                 color = color_active if active else color_inactive
             elif event.type == pygame.KEYDOWN:
                 if operador=='MH':
@@ -180,10 +189,10 @@ def hacer_pregunta(operador):
                             if respuesta_usuario == respuesta_correcta:
                                 mostrar_respuesta("¡Respuesta correcta!", True)
                                 personaje1.nivel += 1
-                                if personaje1.nivel == 2:
-                                    hacer_pregunta('-') 
-                                elif personaje1.nivel == 3 or personaje1.nivel == 4:
+                                if personaje1.nivel == 2 :
                                     hacer_pregunta('+') 
+                                elif personaje1.nivel == 3 or personaje1.nivel == 4:
+                                    hacer_pregunta('-') 
                                 elif personaje1.nivel == 5 or personaje1.nivel == 6:
                                     hacer_pregunta('*')
                                 elif personaje1.nivel == 7 or personaje1.nivel == 8:
@@ -231,7 +240,9 @@ def hacer_pregunta(operador):
                                     hacer_pregunta('+')
                                 elif personaje1.nivel == 11 or personaje1.nivel == 12 :
                                     hacer_pregunta('+')
-
+                                if personaje1.nivel >= 12:
+                                    mostrar_felicidades()  # Mostrar mensaje de felicitaciones
+                                    menu_principal()  
 
                             else:
                                 mostrar_respuesta("Respuesta incorrecta :(", False)
@@ -243,6 +254,7 @@ def hacer_pregunta(operador):
                         text = text[:-1]
                     else:
                         text += event.unicode
+
                 if operador=='-':
                     if event.key == pygame.K_RETURN:
                         try:
@@ -260,7 +272,7 @@ def hacer_pregunta(operador):
                             pass
                         text = ''
                     elif event.key == pygame.K_BACKSPACE:
-                        text = text[:-1]
+                        text = text[:-2]
                     else:
                         text += event.unicode
                 if operador=='/':
@@ -282,6 +294,9 @@ def hacer_pregunta(operador):
                                     hacer_pregunta('/')
                                 elif personaje1.nivel == 11 or personaje1.nivel == 12 :
                                     hacer_pregunta('/')
+                                if personaje1.nivel >= 12:
+                                    mostrar_felicidades()  # Mostrar mensaje de felicitaciones
+                                    menu_principal()  
                             else:
                                 mostrar_respuesta("Respuesta incorrecta :(", False)
                                 quitar_vida()
@@ -311,6 +326,9 @@ def hacer_pregunta(operador):
                                     hacer_pregunta('-')
                                 elif personaje1.nivel == 11 or personaje1.nivel == 12 :
                                     hacer_pregunta('-')
+                                if personaje1.nivel >= 12:
+                                    mostrar_felicidades()  # Mostrar mensaje de felicitaciones
+                                    menu_principal()  
                             else:
                                 mostrar_respuesta("Respuesta incorrecta :(", False)
                                 quitar_vida()
@@ -340,6 +358,9 @@ def hacer_pregunta(operador):
                                     hacer_pregunta('Funciones')
                                 elif personaje1.nivel == 11 or personaje1.nivel == 12 :
                                     hacer_pregunta('Funciones')
+                                if personaje1.nivel >= 12:
+                                    mostrar_felicidades()  # Mostrar mensaje de felicitaciones
+                                    menu_principal()  
                             else:
                                 mostrar_respuesta("Respuesta incorrecta :(", False)
                                 quitar_vida()
@@ -369,6 +390,9 @@ def hacer_pregunta(operador):
                                     hacer_pregunta('Geometría')
                                 elif personaje1.nivel == 11 or personaje1.nivel == 12 :
                                     hacer_pregunta('Geometría')
+                                if personaje1.nivel >= 12:
+                                    mostrar_felicidades()  # Mostrar mensaje de felicitaciones
+                                    menu_principal()  
                             else:
                                 mostrar_respuesta("Respuesta incorrecta :(", False)
                                 quitar_vida()
@@ -398,6 +422,9 @@ def hacer_pregunta(operador):
                                     hacer_pregunta('Trigonometría')
                                 elif personaje1.nivel == 11 or personaje1.nivel == 12 :
                                     hacer_pregunta('Trigonometría')
+                                if personaje1.nivel >= 12:
+                                    mostrar_felicidades()  # Mostrar mensaje de felicitaciones
+                                    menu_principal()  
                             else:
                                 mostrar_respuesta("Respuesta incorrecta :(", False)
                                 quitar_vida()
@@ -427,6 +454,9 @@ def hacer_pregunta(operador):
                                     hacer_pregunta('Sucesiones')
                                 elif personaje1.nivel == 11 or personaje1.nivel == 12 :
                                     hacer_pregunta('Sucesiones')
+                                if personaje1.nivel >= 12:
+                                    mostrar_felicidades()  # Mostrar mensaje de felicitaciones
+                                    menu_principal()  
                             else:
                                 mostrar_respuesta("Respuesta incorrecta :(", False)
                                 quitar_vida()
@@ -456,6 +486,9 @@ def hacer_pregunta(operador):
                                     hacer_pregunta('Sumatorias')
                                 elif personaje1.nivel == 11 or personaje1.nivel == 12 :
                                     hacer_pregunta('Sumatorias')
+                                if personaje1.nivel >= 12:
+                                    mostrar_felicidades()  # Mostrar mensaje de felicitaciones
+                                    menu_principal()  
                             else:
                                 mostrar_respuesta("Respuesta incorrecta :(", False)
                                 quitar_vida()
@@ -485,6 +518,9 @@ def hacer_pregunta(operador):
                                     hacer_pregunta('Vectores')
                                 elif personaje1.nivel == 11 or personaje1.nivel == 12 :
                                     hacer_pregunta('Vectores')
+                                if personaje1.nivel >= 12:
+                                    mostrar_felicidades()  # Mostrar mensaje de felicitaciones
+                                    menu_principal()  
                             else:
                                 mostrar_respuesta("Respuesta incorrecta :(", False)
                                 quitar_vida()
@@ -514,6 +550,9 @@ def hacer_pregunta(operador):
                                     hacer_pregunta('Matrices')
                                 elif personaje1.nivel == 11 or personaje1.nivel == 12 :
                                     hacer_pregunta('Matrices')
+                                if personaje1.nivel >= 12:
+                                    mostrar_felicidades()  # Mostrar mensaje de felicitaciones
+                                    menu_principal()  
                             else:
                                 mostrar_respuesta("Respuesta incorrecta :(", False)
                                 quitar_vida()
